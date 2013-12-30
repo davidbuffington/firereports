@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="width=device-width, minimum-scale=1, maximum-scale=1" name="viewport">
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script> 
+<link rel="stylesheet" href="dev.css">
+<script src="default.js"></script>
+</head>
+<body>
+<!--  
+///////////////////////////////////////////////////////////////////////////		      	This is the opening page
+-->
+<div data-role="page" id="pageone">
+	<div data-role="header" data-theme="b">
+		<h1>Fire Reports</h1>
+	</div>
+
+	<div data-role="content">
+		<div >
+			<center>
+				<img onclick="firewatch()" src="img/firewatch.png"/>
+				<img onclick="firedrill()" src="img/firedrill.png"/>
+			<center>
+		</div>
+		<div >
+			<center>
+				<img onclick="reportalarm()" src="img/alarm.png"/>
+				<img onclick="correctcode()" src="img/code.png"/>
+			</center>
+		</div>
+		<div >	
+			<center>
+				<img onclick="techaccess()" src="img/tech.png"/>
+				<img onclick="fireforms()"src="img/forms.png"/>
+			</center>
+		</div>
+	</div>
+</div> 
+<!--
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////fire forms
+-->
+<div data-role="page" id="forms">
+	<div data-role="header" >
+		<h1>Fire Forms</h1>
+	</div>
+	<div data-role="content">
+		<a href="docs/alarmrequirements.pdf"data-role="button"  data-ajax="false">Alarm Requirements (pdf)</a>
+		<a href="docs/complaintform.doc"data-role="button"  data-ajax="false">Complaint Form (doc)</a>
+		<a href="docs/CSFS_june07.pdf"data-role="button"  data-ajax="false">CSFS_june07 (pdf)</a>
+		<a href="docs/FireInspectionReport.doc"data-role="button"  data-ajax="false">Fire Inspection Report (doc)</a>
+		<a href="docs/FireInspectionReport.pdf"data-role="button"  data-ajax="false">Fire Inspection Report (pdf)</a>
+		<a href="docs/firezones.pdf"data-role="button"  data-ajax="false">Fire Zones (pdf)</a>		
+		<a href="docs/MedicalEmergencyInformation.docx"data-role="button"  data-ajax="false">Medical Emergency Information (docx)</a>
+		<a href="docs/MedicalEmergencyInformation.pdf"data-role="button"  data-ajax="false">Medical Emergency Information (pdf)</a>
+		<a href="docs/NoticePrivacyPractices.pdf"data-role="button"  data-ajax="false">Notice Privacy Practices (pdf)</a>
+		<a href="docs/selfinspectionworksheet.doc" data-role="button" data-ajax="false">Selfinspection Worksheet (doc)</a>
+		<a href="docs/selfinspectionworksheet.pdf"data-role="button"  data-ajax="false">Selfinspection Worksheet (pdf)</a>
+		<a href="docs/Sprinkler_FlowTestForm.pdf"data-role="button"  data-ajax="false">Spinkler Flowtest Form (pdf)</a>
+	</div>
+	<div data-role="footer">
+		<div  >
+			<center>
+				<button data-inline="true" onclick="prev()"><p style="padding:0px;"><img  src="img/prev2.png"/></p></button>
+				<button data-inline="true" onclick="webpageforms()"><p style="padding:3px;">Bremertons<br/>Web Page<br/>(forms)</p></button>
+			</center>
+		</div>
+	</div>
+</div> 
+<!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////fire watch -->
+<div data-role="page" id="firewatch">
+	<div data-role="header" data-theme="b">
+		<h1>Fire Watch</h1>
+	</div>
+	<div data-role="popup" id="popupfw2" data-overlay-theme="a" data-theme="b" data-transition="pop">
+	<a href="#" onclick="fwpopup2close()" data-role="button" data-theme="b" data-icon="check"  class="ui-btn-left">close</a>
+		<center>
+		<h4>Please check the</h4><h2>CheckList</h2><h4>before sending</h4>
+		</center>
+	</div>
+	<div data-role="popup" id="popupfw3" data-overlay-theme="a" data-theme="b" data-transition="pop">
+	<a href="#" onclick="fwpopup3close()" data-role="button" data-theme="b" data-icon="check"  class="ui-btn-left">close</a>
+		<center>
+		Please fill out time and use "AM" or "PM"
+		</center>
+	</div>
+	<div data-role="popup" id="popupfw4" data-overlay-theme="a" data-theme="b" data-transition="pop">
+	<a href="#" onclick="fwpopup4close()" data-role="button" data-theme="b" data-icon="check"  class="ui-btn-left">close</a>
+		<div id="fwjsonresult"></div>
+	</div>
+	<div data-role="popup" id="popupfw" data-overlay-theme="a" data-theme="b" data-transition="pop">
+	<a href="#" onclick="fwpopupclose()" data-role="button" data-theme="b" data-icon="check"  class="ui-btn-left">Done with Checkboxes</a>
+		<br/>
+		<label for="fwcb1">Flashlight</label>
+		<input type="checkbox" name="fwcb1" id="fwcb1" class="custom" />
+		<label for="fwcb2">Whistle/Notification Method</label>
+		<input type="checkbox" name="fwcb2" id="fwcb2" class="custom" />
+		<label for="fwcb3">Phone Number</label>
+		<input type="checkbox" name="fwcb3" id="fwcb3" class="custom" />
+		<label for="fwcb4">Entire Site Walked and Checked</label>
+		<input type="checkbox" name="fwcb4" id="fwcb4" class="custom" />
+		<label for="fwcb5">Dedicated Fire Watch</label>
+		<input type="checkbox" name="fwcb5" id="fwcb5" class="custom" />
+	
+
+	</div>
+	<div data-role="content">
+		<div data-role="fieldcontain">
+			<label for="fwdate">Date</label>
+			<input type="date" id="fwdate" name="fwdate">
+			<label for="fwtime">Time</label>
+			<input type="time" id="fwtime" name="fwtime">
+			<label for="fwname">Name</label>
+			<input type="text" id="fwname" name="fwname">
+			<label for="fwphone">Phone</label>
+			<input type="tel" id="fwphone" name="fwphone">
+			<label for="fwaddress">Address</label>
+			<input type="text" id="fwaddress" name="fwaddress">
+			<div class="ui-grid-a">
+				
+				<div class="ui-block-a">
+					<button id="fwpopupbutton" onclick="popupfw()" data-theme="b">Check List</button>
+				</div>
+				
+				<div class="ui-block-b">
+					<button onclick="fwsend()" data-theme="a">Send</button>
+				</div>				
+			</div>
+		</div>
+	</div>
+	<div data-role="footer"  data-theme="b">		
+		<center>
+			<img class="picspadding" src="img/prev2.png" onclick="prev()"/>	
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<img onclick="reset()" class="picspadding" src="img/home2.png" />
+		</center>
+	</div>
+</div> 
+<!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////correct code violation -->
+<div data-role="page" id="correctcode">
+	<div data-role="header" data-theme="b">
+		<h1>Corrected Code Violations</h1>
+	</div>
+	  
+	<div data-role="popup" id="popupcc2" data-overlay-theme="a" data-theme="b" data-transition="pop">
+	<a href="#" onclick="ccpopup2close()" data-role="button" data-theme="b" data-icon="check"  class="ui-btn-left">close</a>
+		<center>
+		<h4>Please upload a picture first</h4>
+		</center>
+	</div> 
+	<div data-role="popup" id="popupcc3" data-overlay-theme="a" data-theme="b" data-transition="pop">
+	<a href="#" onclick="ccpopup3close()" data-role="button" data-theme="b" data-icon="check"  class="ui-btn-left">close</a>
+		<center>
+		Please fill out time and use "AM" or "PM"
+		</center>
+	</div>
+	<div data-role="popup" id="popupcc4" data-overlay-theme="a" data-theme="b" data-transition="pop">
+	<a href="#" onclick="ccpopup4close()" data-role="button" data-theme="b" data-icon="check"  class="ui-btn-left">close</a>
+		<div id="ccjsonresult"></div>
+	</div>
+	<div data-role="popup" id="popupcc" data-overlay-theme="a" data-theme="b" data-transition="pop">
+		<a href="#" onclick="ccpopupclose()" data-role="button" data-theme="b" data-icon="check"  class="ui-btn-left">Done with Uploads</a>
+		<iframe  seamless></iframe>
+	</div>	
+
+	
+	<div data-role="content">
+		<div data-role="fieldcontain">
+			<label for="ccdate">Date</label>
+			<input type="date" id="ccdate" name="ccdate">
+			<label for="cctime">Time</label>
+			<input type="time" id="cctime" name="cctime">
+			<label for="ccname">Name</label>
+			<input type="text" id="ccname" name="ccname">
+			<label for="ccphone">Phone</label>
+			<input type="tel" id="ccphone" name="ccphone">
+			<label for="ccaddress">Address</label>
+			<input type="text" id="ccaddress" name="ccaddress">
+			<div class="ui-grid-a">
+				
+				<div class="ui-block-a">
+					<button id="ccpopupbutton" onclick="popupcc()" data-theme="b">Upload Pictures</button>
+				</div>
+				
+				<div class="ui-block-b">
+					<button onclick="ccsend()" data-theme="a">Send</button>
+				</div>				
+			</div>
+		</div>
+	</div>
+	<div data-role="footer"  data-theme="b">		
+		<center>
+			<img class="picspadding" src="img/prev2.png" onclick="prev()"/>	
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<img onclick="reset()" class="picspadding" src="img/home2.png" />
+		</center>
+	</div>
+</div><!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////Report Alarm -->
+<div data-role="page" id="reportalarm">
+	<div data-role="header" data-theme="b">
+		<h1>Report Alarm Activation</h1>
+	</div>
+	 
+	<div data-role="popup" id="popupal2" data-overlay-theme="a" data-theme="b" data-transition="pop">
+	<a href="#" onclick="alpopup2close()" data-role="button" data-theme="b" data-icon="check"  class="ui-btn-left">close</a>
+		<center>
+		<h4>Please select 'Cause of Alarm'</h4>
+		</center>
+	</div> 
+	<div data-role="popup" id="popupal3" data-overlay-theme="a" data-theme="b" data-transition="pop">
+	<a href="#" onclick="alpopup3close()" data-role="button" data-theme="b" data-icon="check"  class="ui-btn-left">close</a>
+		<center>
+		Please fill out time and use "AM" or "PM"
+		</center>
+	</div>
+	
+	<div data-role="popup" id="popupal4" data-overlay-theme="a" data-theme="b" data-transition="pop">
+	<a href="#" onclick="alpopup4close()" data-role="button" data-theme="b" data-icon="check"  class="ui-btn-left">close</a>
+		<div id="aljsonresult"></div>
+	</div>
+	<div data-role="popup" id="popupal" data-overlay-theme="a" data-theme="b" data-transition="pop">
+		<label for="alproblem" >Problem</label>
+		<input type="text" id="alproblem" name="alproblem"/>
+		<label for="alsteps" >Steps to Correct Problem</label>
+		<textarea id="alsteps" name="alsteps"></textarea>
+		<button onclick="alpopupclose()" data-theme="b">Done</button>
+	</div>
+	
+	<div data-role="content">
+		<div data-role="fieldcontain">
+			<label for="aldate">Date</label>
+			<input type="date" id="aldate" name="aldate">
+			<label for="altime">Time</label>
+			<input type="time" id="altime" name="altime">
+			<label for="alname">Name</label>
+			<input type="text" id="alname" name="alname">
+			<label for="alphone">Phone</label>
+			<input type="tel" id="alphone" name="alphone">
+			<label for="aladdress">Address</label>
+			<input type="text" id="aladdress" name="aladdress">
+			<div class="ui-grid-a">
+				
+				<div class="ui-block-a">
+					<button id="alpopupbutton" onclick="popupal()" data-theme="b">Cause of Alarm</button>
+				</div>
+				
+				<div class="ui-block-b">
+					<button onclick="alsend()" data-theme="a">Send</button>
+				</div>				
+			</div>
+		</div>
+	</div>
+	<div data-role="footer"  data-theme="b">		
+		<center>
+			<img class="picspadding" src="img/prev2.png" onclick="prev()"/>	
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<img onclick="reset()" class="picspadding" src="img/home2.png" />
+		</center>
+	</div>
+</div> 
+<!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////Fire Drill -->
+<div data-role="page" id="firedrill">
+	<div data-role="header" data-theme="b">
+		<h1>Fire Drill</h1>
+	</div>
+	<div data-role="popup" id="popupfd2" data-overlay-theme="a" data-theme="b" data-transition="pop">
+	<a href="#" onclick="fdpopup2close()" data-role="button" data-theme="b" data-icon="check"  class="ui-btn-left">close</a>
+		<center>
+		<h4>Please choose a Scenario</h4>
+		</center>
+	</div> 
+	<div data-role="popup" id="popupfd3" data-overlay-theme="a" data-theme="b" data-transition="pop">
+	<a href="#" onclick="fdpopup3close()" data-role="button" data-theme="b" data-icon="check"  class="ui-btn-left">close</a>
+		<center>
+		Please fill out time and use "AM" or "PM"
+		</center>
+	</div>
+	
+	<div data-role="popup" id="popupfd4" data-overlay-theme="a" data-theme="b" data-transition="pop">
+	<a href="#" onclick="fdpopup4close()" data-role="button" data-theme="b" data-icon="check"  class="ui-btn-left">close</a>
+		<div id="fdjsonresult"></div>
+	</div>
+	<div data-role="popup" id="popupfd" data-overlay-theme="a" data-theme="b" data-transition="pop">
+	
+		
+		<button data-theme="b" onclick="fdbutton('alarm')">USED FIRE ALARM TO ACTIVATE DRILL<br/>
+		(fire drills must be planned, a fire alarm activation is not a fire drill)</button>
+		<br/>
+		<div id="fddivother" >
+		<label for="fdother">OTHER:</label>
+		<input type="text" id="fdother" name="fdother" />
+		<center><button data-mini="true" data-inline="true" onclick="fdbutton('other')">Okay</button></center>
+		</div>
+	</div>
+	
+	<div data-role="content">
+		<div data-role="fieldcontain">
+			<label for="fddate">Date</label>
+			<input type="date" id="fddate" name="fddate">
+			<label for="fdtime">Time</label>
+			<input type="time" id="fdtime" name="fdtime">
+			<label for="fdname">Name</label>
+			<input type="text" id="fdname" name="fdname">
+			<label for="fdphone">Phone</label>
+			<input type="tel" id="fdphone" name="fdphone">
+			<label for="fdaddress">Address</label>
+			<input type="text" id="fdaddress" name="fdaddress">
+			<div class="ui-grid-a">
+				
+				<div class="ui-block-a">
+					<button id="fdpopupbutton" onclick="popupfd()" data-theme="b">Scenario</button>
+				</div>
+				
+				<div class="ui-block-b">
+					<button onclick="fdsend()" data-theme="a">Send</button>
+				</div>				
+			</div>
+		</div>
+	</div>
+	<div data-role="footer"  data-theme="b">		
+		<center>
+			<img class="picspadding" src="img/prev2.png" onclick="prev()"/>	
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<img onclick="reset()" class="picspadding" src="img/home2.png" />
+		</center>
+	</div>
+</div> 
+
+<!--
+//////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////   Tech page section
+//////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<!-- /////////////////////////////////////////////////////////////////////////////////////////////// page one -->
+
+<div data-role="page" id="techone" data-title="System Inspection">				
+	<div  data-role="header"  data-theme="b" > 
+		<h1>Place being inspected</h1> 
+	</div> 
+  <div data-role="content">
+	<center>
+		<img src="img/si2.png" />
+	</center>
+	<div data-role="fieldcontain">
+		<label for="bname">Name:</label>
+		<input type="text" name="bname" id="bname">
+		<label for="baddress">Address:</label>
+		<input type="text" name="baddress" id="baddress">
+		<label for="bphone">Phone:</label>
+		<input type="tel" name="bphone" id="bphone">
+		<label for="bcontact">Contact:</label>
+		<input type="text" name="bcontact" id="bcontact">
+	</div>
+	<center>
+		<img src="img/prev.png" onclick="prev()"/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<img src="img/next.png" onclick="sione()"/>
+	</center>
+   </div>
+</div>
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////////page two -->
+<div data-role="page" id="techtwo" data-title="System Inspection">				
+	<div  data-role="header"  data-theme="b" > 
+		<h1>Inspector</h1> 
+	</div> 
+  <div data-role="content">
+	<center>
+		<img src="img/ii2.png" />
+	</center>
+	<div data-role="fieldcontain">
+		<label for="iname">Name:</label>
+		<input type="text" name="iname" id="iname">
+		<label for="iphone">Phone:</label>
+		<input type="tel" name="iphone" id="iphone">
+		<label for="iemail">Email:</label>
+		<input type="text" name="iemail" id="iemail">
+		<label for="icompany">Company:</label>
+		<input type="text" name="icompany" id="icompany">
+	</div>
+	<center>
+		<img src="img/prev.png" onclick="prev()"/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<img onclick="sitwo()" src="img/next.png" />
+	</center>
+   </div>
+</div>
+<!-- //////////////////////////////////////////////////////////////////////////////////////////////////Action Page  -->
+<div data-role="page" id="actionpage" data-theme="b">
+	<div data-role="header"  data-theme="b">		
+	<center><h3> Type of Report </h3></center>
+	</div>
+	
+	
+	<div data-role="content">
+		<button onclick="reportpage('Repair')">Repair</button>
+		<button onclick="reportpage('System Modification')">System Modification</button>
+		<button onclick="reportpage('New System/Equipment')">New System/Equipment</button>
+		<button onclick="techthreepage()">Routine Test</button>
+		<button onclick="reportpage('Other')" >Other</button><br/>
+	<br/>
+	<center>
+		<img src="img/prev.png" onclick="prev()"/>
+	</center>
+	</div>
+
+
+</div> 
+<!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////Report page -->
+<div data-role="page" id="reportpage" data-theme="b">
+	<div data-role="header"  data-theme="b" id="reportheader">		
+	</div>
+	<div data-role="popup" id="popupMap" data-overlay-theme="a" data-theme="b" data-transition="pop">
+		<a href="#" onclick="closemappopup()" data-role="button" data-theme="b" data-icon="check"  class="ui-btn-left">Done with Map</a>
+		<iframe seamless></iframe>
+	</div>
+	
+	<div data-role="popup" id="popupupload" data-overlay-theme="a" data-theme="b" data-transition="pop">
+		<a href="#" onclick="closeuploadpopup()" data-role="button" data-theme="b" data-icon="check"  class="ui-btn-left">Done with Uploads</a>
+		<iframe  seamless></iframe>
+	</div>	
+	
+	<div data-role="content">
+		<div class="ui-grid-a">
+			<div class="ui-block-a">
+				<label for="reportdate">Date:</label>
+				<input type="date" id="reportdate" name="reportdate" />
+			</div>
+			<div class="ui-block-b" >
+				<center>
+					<img onclick="mappopup()" id="popupmappic1" src="img/sloffsmall2.png" />
+					<img onclick="uploadpopup()" id="popupuploadpic1" src="img/uploadoffsmall2.png" />
+				</center>
+			</div>
+		</div>		
+		<div >
+			<label for="reportta">Notes:</label>
+			<textarea name="reportta" id="reportta"></textarea>
+		</div>
+	<br/>
+	</div>
+	
+	<div data-role="footer"  data-theme="b">		
+		<center>
+			<img class="picspadding" src="img/prev2.png" onclick="prev()"/>	
+			<img class="picspadding" id="perotpagesendbutton" src="img/submit.png" />
+			<img onclick="reset()" class="picspadding" src="img/home2.png" />
+		</center>
+	</div>	
+
+</div> 
+<!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////page three  -->
+<div data-role="page" id="techthree" data-theme="b">
+	<div data-role="popup" id="popup" data-overlay-theme="a" data-theme="b" data-transition="pop">
+		<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+		<center>Please pick "Type of System" first<hr/>(top left icon)</center>
+	</div>
+	
+	<div data-role="header" data-theme="b">
+		<center>Routine Tests</center>
+	</div>
+	<div data-role="content">
+		<div >
+			<center>
+				<img onclick="tosclick()" id="tospic" src="img/typeoff.png"/>
+				<img id="insuploadpic" onclick="uploadlink()" src="img/uploadoff.png"/>
+			<center>
+		</div>
+		<div >
+			<center>
+				<img onclick="instaclick()" id="instapic" src="img/commentoff.png"/>
+				<img onclick="insstatusclick()" id="insstatuspic" src="img/statusoff.png"/>
+			</center>
+		</div>
+		<div >
+			<center>
+				<img onclick="insmap()" id="insmappic" src="img/sloff.png"/>
+				<img id="insdatepic" onclick="insdatestart()" src="img/dateoff.png"/>
+			</center>
+		</div>
+	
+	</div>
+	<div data-role="footer"  data-theme="b">		
+		<center>
+			<img class="picspadding" src="img/prev2.png" onclick="prev()"/>	
+			<img class="picspadding" onclick="send()" src="img/submit.png" />
+			<img onclick="reset()" class="picspadding" src="img/home2.png" />
+		</center>
+	</div>	
+
+</div> 
+<!--    /////////////////////////////////////////////////////////////////////////////////////////////////////////type of system  -->
+<div data-role="page" data-theme="c"id="tos">
+	<div  data-role="header"  data-theme="b" > 
+		<center><h2>Type of System</h2></center>
+	</div>
+	
+	<div data-role="popup" id="popup2" data-overlay-theme="a" data-theme="b" data-transition="pop">
+		<center>
+			<label for="alarmnicet">NICET#</label>
+			<input type="text" id="alarmnicet" name="alarmnicet" />
+		</center>
+		<button data-theme="b" onclick="tosnext()">Okay</button>
+	</div>
+	
+	<div data-role="popup" id="popup3" data-overlay-theme="a" data-theme="b" data-transition="pop">
+		<center>
+			Please Include Pictures of the Hood System
+		</center>
+		<button data-theme="b" onclick="gotouploads()">Okay</button>
+	</div>
+	
+	<div data-role="popup" id="popup4" data-overlay-theme="a" data-theme="b" data-transition="pop">
+		<center>
+			Please Include Pictures of the Sprinkler System
+		</center>
+		<button data-theme="b" onclick="gotouploads()">Okay</button>
+	</div>
+	
+	<div data-role="content"  >
+			<div class="ui-grid-b">
+				<div class="ui-block-a"><center><img onclick="tospick(1)" src="img/buttonAl.png" /></center></div>
+				<div class="ui-block-b"><center><img onclick="tospick(2)" src="img/buttonCo.png" /></center></div>
+				<div class="ui-block-c"><center><img onclick="tospick(3)" src="img/buttonEx.png" /></center></div>
+			</div><!-- /grid-b -->
+			<div class="ui-grid-b">
+				<div class="ui-block-a"><center><img onclick="tospick(4)" src="img/buttonFm.png" /></center></div>
+				<div class="ui-block-b"><center><img onclick="tospick(5)" src="img/buttonHo.png" /></center></div>
+				<div class="ui-block-c"><center><img onclick="tospick(6)" src="img/buttonPu.png" /></center></div>
+			</div><!-- /grid-b -->
+			<div class="ui-grid-b">
+				<div class="ui-block-a"><center><img onclick="tospick(7)" src="img/buttonSb.png" /></center></div>
+				<div class="ui-block-b"><center><img onclick="tospick(8)" src="img/buttonSp.png" /></center></div>
+				<div class="ui-block-c"><center><img onclick="tospick(9)" src="img/buttonSt.png" /></center></div>
+			</div><!-- /grid-b -->
+	</div>
+</div>
+<!--   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////comments page  -->
+<div data-role="page" data-theme="c" id="insta">
+	<div  data-role="header"  data-theme="b" > 
+		<center><h2>Comments</h2></center>
+	</div>
+	<div data-role="content"  >
+		<center>
+			<br/>
+			<textarea id="tacomments"></textarea><br/><br/>
+			<img onclick="insta()"src="img/done.png" />
+		</center>
+	</div>
+</div>	
+<!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////// uploads page -->
+<div data-role="page" data-theme="b" id="insupload">
+	<div  data-role="header"  data-theme="b" > 
+		<center><h2>Uploads</h2></center>
+	</div>
+	<div data-role="content" style="padding:0px">
+		
+			<div id="insuploaddiv">
+			</div>
+		
+	</div>
+
+</div>	
+<!--   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////status page -->
+
+<div data-role="page" data-theme="b" id="insstatus">
+	<div  data-role="header"  data-theme="b" > 
+		<center><h2>Status</h2></center>
+	</div>
+	<div data-role="content" >
+		<div id="reddiv" onclick="red()"><center><h2>Not Operational</h2></center></div><hr/>
+		<div id="yellowdiv"onclick="yellow()"><center><h2>Operational with Violations</h2></center></div><hr/>
+		<div id="greendiv"onclick="green()"><center><h2>Operational No Violations</h2></center></div>
+	</div>
+</div>
+<!--  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////// date page -->
+<div data-role="page" data-theme="b" id="insdate">
+	<div  data-role="header"  data-theme="b" > 
+		<center><h2>Date</h2></center>
+	</div>
+	<div data-role="content" >
+		<center>
+			<br/>
+			<br/>
+			<label for="insdateinput">Pick Inspection Date (mm/dd/yyyy)</label>
+			<input type="date" id="insdateinput" name="insdateinput"/>
+			<br/>
+			<br/>
+			<img src="img/done.png" onclick="insdate()"/>
+		</center>	
+	</div>
+</div>
+<!--   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////map page -->
+<div data-role="page" id="insmap">
+		
+       <div data-role="content" id="mapcontent">
+			<div id="markerdiv"></div>
+            <div id="map_canvas" ></div>
+			<div id="mapdonediv"><center><button onclick="mapback()" "data-icon="check"  data-inline="true" data-theme="b">Done!</button></center></div>
+       </div>
+	   
+</div>
+<!--  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////// results page  -->
+<div data-role="page" data-theme="b" id="jsonresults">
+	<div  data-role="header"  data-theme="b" > 
+		<center><h2>Results</h2></center>
+	</div>
+	<div data-role="content"  >
+		<div id="jsonresult"></div>
+		<div id="jsonresult2"></div>
+	</div>
+</div>	
+</body>
+</html>

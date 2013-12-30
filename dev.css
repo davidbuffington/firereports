@@ -1,0 +1,154 @@
+
+html, body {
+    height : 100%;
+	padding-top:0px;
+padding-bottom:0px;
+padding-right:0px;
+padding-left:0px;
+}
+.picspadding{
+padding:5px
+}
+.picspadding2{
+padding-top:1px;
+padding-bottom:1px;
+padding-right:2px;
+padding-left:2px;
+}
+#popupupload{
+padding:0px;
+}
+#popup{
+padding:40px;
+}
+#popup2{
+top:50px;
+padding:40px;
+}
+#popup3{
+top:50px;
+padding:40px;
+}
+#popupfw{
+padding:10px;
+}
+#popupfw2{
+padding:40px;
+}
+#popupfd2{
+padding:40px;
+}
+#popupcc2{
+padding:40px;
+}
+#popupal2{
+padding:40px;
+}
+#popupfw3{
+padding:40px;
+}
+#popupcc3{
+padding:40px;
+}
+#popupfd3{
+padding:40px;
+}
+#popupal3{
+padding:40px;
+}
+#popupfw4{
+padding:40px;
+}
+#popupcc4{
+padding:40px;
+}
+#popupfd4{
+padding:40px;
+}
+#popupal4{
+padding:40px;
+}
+#popupfd{
+padding:10px;
+}
+#popupal{
+padding:10px;
+}
+#tacomments{
+height:40px;
+}
+#fddivother{
+border-color:black;
+border-width:1px;
+border-style:solid;
+color:white;
+    background-image: -webkit-linear-gradient(top, #5f98c3 0%, #416ba5 100%);  
+    background-image: -moz-linear-gradient(top, #5f98c3 0%, #416ba5 100%);  
+    background-image: -ms-linear-gradient(top, #5f98c3 0%, #416ba5 100%);  
+    background-image: -o-linear-gradient(top, #5f98c3 0%, #416ba5 100%);  
+    background-image: linear-gradient(top, #5f98c3 0%, #416ba5 100%); 
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -khtml-border-radius: 15px;
+    border-radius: 15px;
+	padding:10px;
+}
+#reddiv{
+color:black;
+font-weight:bold;
+background-color:red;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -khtml-border-radius: 20px;
+    border-radius: 20px;
+	padding:10px;
+}
+#yellowdiv{
+color:black;
+font-weight:bold;
+background-color:#DB9900;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -khtml-border-radius: 20px;
+    border-radius: 20px;
+	padding:10px;
+}
+#greendiv{
+color:black;
+font-weight:bold;
+background-color:green;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -khtml-border-radius: 20px;
+    border-radius: 20px;
+	padding:10px;
+}
+#insmap{
+padding:0px;
+}
+#mapcontent{
+padding:0px;
+}
+#map_canvas{
+position:absolute;
+top:0px;
+padding:0px;
+}
+#gpspic{
+
+}
+#markerdiv{
+position:absolute;
+height:50px;
+width:50px;
+z-index:100;
+background-image:url('img/gps.png');
+pointer-events:none;
+}
+#mapdonediv{
+position:absolute;
+bottom:0px;
+width:100%;
+z-index:100;
+
+}
